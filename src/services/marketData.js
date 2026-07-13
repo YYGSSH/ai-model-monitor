@@ -7,18 +7,21 @@
  */
 
 const MODELS = {
-  GPT4_1:    { name: 'GPT-4.1',               category: 'LLM',        baseMetric: 93.8, volatility: 0.007, meanReversion: 0.03 },
-  CLAUDE4:   { name: 'Claude 4 Sonnet',        category: 'LLM',        baseMetric: 95.1, volatility: 0.005, meanReversion: 0.025 },
-  LLAMA4:    { name: 'Llama 4 Maverick',       category: 'LLM',        baseMetric: 90.2, volatility: 0.010, meanReversion: 0.02 },
-  MISTRAL3:  { name: 'Mistral Large 3',        category: 'LLM',        baseMetric: 91.5, volatility: 0.009, meanReversion: 0.022 },
-  GEMINI25:  { name: 'Gemini 2.5 Pro',         category: 'LLM',        baseMetric: 93.3, volatility: 0.006, meanReversion: 0.028 },
-  DEEPSEEK:  { name: 'DeepSeek R1',            category: 'LLM',        baseMetric: 91.0, volatility: 0.010, meanReversion: 0.02 },
-  FLUX:      { name: 'FLUX.1 Pro',             category: 'Image',      baseMetric: 89.5, volatility: 0.012, meanReversion: 0.018 },
-  GPT_IMG:   { name: 'GPT-image-1',            category: 'Image',      baseMetric: 91.8, volatility: 0.008, meanReversion: 0.025 },
-  WHISPER:   { name: 'Whisper Large v3',       category: 'Audio',      baseMetric: 94.0, volatility: 0.005, meanReversion: 0.03 },
-  ELEVEN:    { name: 'ElevenLabs TTS v2',      category: 'Audio',      baseMetric: 88.4, volatility: 0.011, meanReversion: 0.02 },
-  RERANK:    { name: 'Cohere Rerank 3.5',      category: 'Search',     baseMetric: 92.0, volatility: 0.008, meanReversion: 0.022 },
-  VOYAGE:    { name: 'Voyage Embedding 3',     category: 'Search',     baseMetric: 89.8, volatility: 0.010, meanReversion: 0.02 },
+  GPT5:    { name: 'GPT-5',               category: 'LLM',        baseMetric: 95.2, volatility: 0.006, meanReversion: 0.03 },
+  OPUS48:  { name: 'Claude Opus 4.8',     category: 'LLM',        baseMetric: 95.8, volatility: 0.005, meanReversion: 0.025 },
+  SONNET5: { name: 'Claude Sonnet 5',     category: 'LLM',        baseMetric: 94.5, volatility: 0.007, meanReversion: 0.028 },
+  LLAMA4:  { name: 'Llama 4 Maverick',    category: 'LLM',        baseMetric: 91.2, volatility: 0.010, meanReversion: 0.02 },
+  GEMINI:  { name: 'Gemini 2.5 Pro',      category: 'LLM',        baseMetric: 94.0, volatility: 0.006, meanReversion: 0.028 },
+  DEEPV4:  { name: 'DeepSeek V4 Pro',     category: 'LLM',        baseMetric: 93.5, volatility: 0.008, meanReversion: 0.025 },
+  QWEN:    { name: 'Qwen3-235B',          category: 'LLM',        baseMetric: 92.8, volatility: 0.009, meanReversion: 0.022 },
+  GLM:     { name: 'GLM-5-Plus',          category: 'LLM',        baseMetric: 91.5, volatility: 0.010, meanReversion: 0.02 },
+  MISTRAL: { name: 'Mistral Large 2',     category: 'LLM',        baseMetric: 92.0, volatility: 0.009, meanReversion: 0.022 },
+  SDXL:    { name: 'FLUX.1 Pro',          category: 'Image',      baseMetric: 89.5, volatility: 0.012, meanReversion: 0.018 },
+  DALL_E:  { name: 'DALL-E 4',            category: 'Image',      baseMetric: 92.5, volatility: 0.008, meanReversion: 0.025 },
+  WHISPER: { name: 'Whisper Large v3',    category: 'Audio',      baseMetric: 94.0, volatility: 0.005, meanReversion: 0.03 },
+  TTS:     { name: 'ElevenLabs TTS v2',   category: 'Audio',      baseMetric: 88.4, volatility: 0.011, meanReversion: 0.02 },
+  RERANK:  { name: 'Cohere Rerank 3.5',   category: 'Search',     baseMetric: 92.0, volatility: 0.008, meanReversion: 0.022 },
+  EMBED:   { name: 'Voyage Embedding 3',  category: 'Search',     baseMetric: 89.8, volatility: 0.010, meanReversion: 0.02 },
 }
 
 function gaussianRandom() {
