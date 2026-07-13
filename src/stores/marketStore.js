@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { generateHistoricalData, generateTick, getModels } from '../services/marketData'
 
 const useModelStore = create((set, get) => ({
-  selectedModel: 'GPT4',
+  selectedModel: 'GPT4_1',
   interval: '1h',
 
   metrics: [],
@@ -18,7 +18,7 @@ const useModelStore = create((set, get) => ({
 
   tickers: {},
   models: getModels(),
-  watchlist: ['GPT4', 'CLAUDE', 'LLAMA', 'MISTRAL', 'GEMINI', 'DEEPSEEK', 'SDXL', 'DALL_E'],
+  watchlist: ['GPT4_1', 'CLAUDE4', 'LLAMA4', 'MISTRAL3', 'GEMINI25', 'DEEPSEEK', 'FLUX', 'GPT_IMG'],
   updateInterval: null,
 
   initializeModel: (modelId) => {

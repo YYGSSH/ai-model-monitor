@@ -3,21 +3,22 @@
  *
  * Generates realistic model performance metrics using statistical models
  * with mean reversion and trend behavior, simulating real ML model monitoring.
+ * Updated with latest 2025-2026 generation models.
  */
 
 const MODELS = {
-  GPT4:    { name: 'GPT-4 Turbo',         category: 'LLM',        baseMetric: 92.5, volatility: 0.008, meanReversion: 0.03 },
-  CLAUDE:  { name: 'Claude 3.5 Sonnet',    category: 'LLM',        baseMetric: 94.1, volatility: 0.006, meanReversion: 0.025 },
-  LLAMA:   { name: 'Llama 3 70B',          category: 'LLM',        baseMetric: 88.7, volatility: 0.012, meanReversion: 0.02 },
-  MISTRAL: { name: 'Mistral Large',        category: 'LLM',        baseMetric: 90.3, volatility: 0.010, meanReversion: 0.022 },
-  GEMINI:  { name: 'Gemini Ultra',         category: 'LLM',        baseMetric: 91.8, volatility: 0.007, meanReversion: 0.028 },
-  DEEPSEEK:{ name: 'DeepSeek V3',          category: 'LLM',        baseMetric: 89.5, volatility: 0.011, meanReversion: 0.02 },
-  SDXL:    { name: 'Stable Diffusion XL',  category: 'Image',      baseMetric: 85.2, volatility: 0.015, meanReversion: 0.015 },
-  DALL_E:  { name: 'DALL-E 3',             category: 'Image',      baseMetric: 90.1, volatility: 0.009, meanReversion: 0.025 },
-  WHISPER: { name: 'Whisper Large',        category: 'Audio',      baseMetric: 93.0, volatility: 0.005, meanReversion: 0.03 },
-  TTS:     { name: 'Neural TTS',           category: 'Audio',      baseMetric: 87.6, volatility: 0.013, meanReversion: 0.018 },
-  RERANK:  { name: 'Rerank Model v2',      category: 'NLP',        baseMetric: 91.2, volatility: 0.009, meanReversion: 0.022 },
-  EMBED:   { name: 'Embedding v3',         category: 'NLP',        baseMetric: 86.8, volatility: 0.014, meanReversion: 0.016 },
+  GPT4_1:    { name: 'GPT-4.1',               category: 'LLM',        baseMetric: 93.8, volatility: 0.007, meanReversion: 0.03 },
+  CLAUDE4:   { name: 'Claude 4 Sonnet',        category: 'LLM',        baseMetric: 95.1, volatility: 0.005, meanReversion: 0.025 },
+  LLAMA4:    { name: 'Llama 4 Maverick',       category: 'LLM',        baseMetric: 90.2, volatility: 0.010, meanReversion: 0.02 },
+  MISTRAL3:  { name: 'Mistral Large 3',        category: 'LLM',        baseMetric: 91.5, volatility: 0.009, meanReversion: 0.022 },
+  GEMINI25:  { name: 'Gemini 2.5 Pro',         category: 'LLM',        baseMetric: 93.3, volatility: 0.006, meanReversion: 0.028 },
+  DEEPSEEK:  { name: 'DeepSeek R1',            category: 'LLM',        baseMetric: 91.0, volatility: 0.010, meanReversion: 0.02 },
+  FLUX:      { name: 'FLUX.1 Pro',             category: 'Image',      baseMetric: 89.5, volatility: 0.012, meanReversion: 0.018 },
+  GPT_IMG:   { name: 'GPT-image-1',            category: 'Image',      baseMetric: 91.8, volatility: 0.008, meanReversion: 0.025 },
+  WHISPER:   { name: 'Whisper Large v3',       category: 'Audio',      baseMetric: 94.0, volatility: 0.005, meanReversion: 0.03 },
+  ELEVEN:    { name: 'ElevenLabs TTS v2',      category: 'Audio',      baseMetric: 88.4, volatility: 0.011, meanReversion: 0.02 },
+  RERANK:    { name: 'Cohere Rerank 3.5',      category: 'Search',     baseMetric: 92.0, volatility: 0.008, meanReversion: 0.022 },
+  VOYAGE:    { name: 'Voyage Embedding 3',     category: 'Search',     baseMetric: 89.8, volatility: 0.010, meanReversion: 0.02 },
 }
 
 function gaussianRandom() {
@@ -63,6 +64,7 @@ export function generateHistoricalData(modelId, periods = 200, interval = '1h') 
     '1h': 3600000,
     '4h': 14400000,
     '1d': 86400000,
+  '1w': 604800000,
   }
 
   const ms = intervalMs[interval] || 3600000

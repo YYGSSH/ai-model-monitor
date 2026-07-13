@@ -11,7 +11,7 @@ function App() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    store.initializeModel('GPT4')
+    store.initializeModel('GPT4_1')
     store.initializeTickers()
     store.startRealtime()
     return () => store.stopRealtime()
@@ -74,7 +74,7 @@ function App() {
                 <span className="text-sm text-text-muted">{getModels().find(m => m.id === store.selectedModel)?.category}</span>
               </div>
               <div className="flex gap-2">
-                {['1m', '5m', '15m', '1h', '4h', '1d'].map(i => (
+                {['5m', '15m', '1h', '4h', '1d', '1w'].map(i => (
                   <button key={i} onClick={() => store.setInterval(i)}
                     className={`px-3 py-1.5 text-xs rounded-lg ${store.interval === i ? 'bg-accent text-white' : 'bg-surface-alt text-text-secondary hover:bg-border'}`}>
                     {i}
