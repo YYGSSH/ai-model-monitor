@@ -11,7 +11,7 @@ function App() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    store.initializeModel('CLAUDE5')
+    store.initializeModel('GEMINI25P')
     store.initializeTickers()
     store.startRealtime()
     return () => store.stopRealtime()
