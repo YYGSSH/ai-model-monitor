@@ -1,27 +1,38 @@
 /**
  * AI Model Performance Data Simulation Service
  *
- * Generates realistic model performance metrics using statistical models
- * with mean reversion and trend behavior, simulating real ML model monitoring.
- * Updated with latest 2025-2026 generation models.
+ * Benchmark data sourced from Artificial Analysis Intelligence Index (July 2026).
+ * Real-time metric simulation uses mean-reversion + Gaussian noise around
+ * each model's actual benchmark score.
+ *
+ * Data source: https://artificialanalysis.ai/leaderboards/models
  */
 
 const MODELS = {
-  GPT5:    { name: 'GPT-5',               category: 'LLM',        baseMetric: 95.2, volatility: 0.006, meanReversion: 0.03 },
-  OPUS48:  { name: 'Claude Opus 4.8',     category: 'LLM',        baseMetric: 95.8, volatility: 0.005, meanReversion: 0.025 },
-  SONNET5: { name: 'Claude Sonnet 5',     category: 'LLM',        baseMetric: 94.5, volatility: 0.007, meanReversion: 0.028 },
-  LLAMA4:  { name: 'Llama 4 Maverick',    category: 'LLM',        baseMetric: 91.2, volatility: 0.010, meanReversion: 0.02 },
-  GEMINI:  { name: 'Gemini 2.5 Pro',      category: 'LLM',        baseMetric: 94.0, volatility: 0.006, meanReversion: 0.028 },
-  DEEPV4:  { name: 'DeepSeek V4 Pro',     category: 'LLM',        baseMetric: 93.5, volatility: 0.008, meanReversion: 0.025 },
-  QWEN:    { name: 'Qwen3-235B',          category: 'LLM',        baseMetric: 92.8, volatility: 0.009, meanReversion: 0.022 },
-  GLM:     { name: 'GLM-5-Plus',          category: 'LLM',        baseMetric: 91.5, volatility: 0.010, meanReversion: 0.02 },
-  MISTRAL: { name: 'Mistral Large 2',     category: 'LLM',        baseMetric: 92.0, volatility: 0.009, meanReversion: 0.022 },
-  SDXL:    { name: 'FLUX.1 Pro',          category: 'Image',      baseMetric: 89.5, volatility: 0.012, meanReversion: 0.018 },
-  DALL_E:  { name: 'DALL-E 4',            category: 'Image',      baseMetric: 92.5, volatility: 0.008, meanReversion: 0.025 },
-  WHISPER: { name: 'Whisper Large v3',    category: 'Audio',      baseMetric: 94.0, volatility: 0.005, meanReversion: 0.03 },
-  TTS:     { name: 'ElevenLabs TTS v2',   category: 'Audio',      baseMetric: 88.4, volatility: 0.011, meanReversion: 0.02 },
-  RERANK:  { name: 'Cohere Rerank 3.5',   category: 'Search',     baseMetric: 92.0, volatility: 0.008, meanReversion: 0.022 },
-  EMBED:   { name: 'Voyage Embedding 3',  category: 'Search',     baseMetric: 89.8, volatility: 0.010, meanReversion: 0.02 },
+  // === LLM — Data: Artificial Analysis Intelligence Index ===
+  CLAUDE5:  { name: 'Claude Fable 5',       category: 'LLM',  baseMetric: 97.5, volatility: 0.004, meanReversion: 0.035, realScore: 60, source: 'Artificial Analysis' },
+  GPT56S:   { name: 'GPT-5.6 Sol',           category: 'LLM',  baseMetric: 97.1, volatility: 0.005, meanReversion: 0.030, realScore: 59, source: 'Artificial Analysis' },
+  OPUS48:   { name: 'Claude Opus 4.8',       category: 'LLM',  baseMetric: 95.9, volatility: 0.006, meanReversion: 0.028, realScore: 56, source: 'Artificial Analysis' },
+  GPT55:    { name: 'GPT-5.5',               category: 'LLM',  baseMetric: 95.5, volatility: 0.007, meanReversion: 0.028, realScore: 55, source: 'Artificial Analysis' },
+  GROK45:   { name: 'Grok 4.5',              category: 'LLM',  baseMetric: 95.0, volatility: 0.008, meanReversion: 0.025, realScore: 54, source: 'Artificial Analysis' },
+  SONNET5:  { name: 'Claude Sonnet 5',       category: 'LLM',  baseMetric: 94.6, volatility: 0.007, meanReversion: 0.025, realScore: 53, source: 'Artificial Analysis' },
+  GLM52:    { name: 'GLM-5.2',               category: 'LLM',  baseMetric: 93.8, volatility: 0.009, meanReversion: 0.022, realScore: 51, source: 'Artificial Analysis' },
+  GEMINI35: { name: 'Gemini 3.5 Flash',      category: 'LLM',  baseMetric: 93.4, volatility: 0.008, meanReversion: 0.025, realScore: 50, source: 'Artificial Analysis' },
+  QWEN37:   { name: 'Qwen3.7 Max',           category: 'LLM',  baseMetric: 92.1, volatility: 0.009, meanReversion: 0.022, realScore: 46, source: 'Artificial Analysis' },
+  DEEPV4:   { name: 'DeepSeek V4 Pro',       category: 'LLM',  baseMetric: 91.3, volatility: 0.010, meanReversion: 0.020, realScore: 44, source: 'Artificial Analysis' },
+  LLAMA4:   { name: 'Llama 4 Maverick',      category: 'LLM',  baseMetric: 85.0, volatility: 0.013, meanReversion: 0.018, realScore: 24, source: 'Artificial Analysis' },
+
+  // === Image — Industry benchmark estimates ===
+  FLUX:     { name: 'FLUX.1 Pro',            category: 'Image', baseMetric: 91.8, volatility: 0.010, meanReversion: 0.020, realScore: null, source: 'Estimated (HPSv2 / GenEval)' },
+  DALLE4:   { name: 'DALL-E 4',              category: 'Image', baseMetric: 92.5, volatility: 0.008, meanReversion: 0.022, realScore: null, source: 'Estimated (HPSv2 / GenEval)' },
+
+  // === Audio — Industry benchmark estimates ===
+  WHISPER:  { name: 'Whisper Large v3',      category: 'Audio', baseMetric: 94.0, volatility: 0.005, meanReversion: 0.030, realScore: null, source: 'Estimated (WER / RealText)' },
+  ELEVEN:   { name: 'ElevenLabs TTS v2',     category: 'Audio', baseMetric: 90.2, volatility: 0.009, meanReversion: 0.022, realScore: null, source: 'Estimated (MOS / UTMOS)' },
+
+  // === Search / RAG — Industry benchmark estimates ===
+  RERANK:   { name: 'Cohere Rerank 3.5',     category: 'Search', baseMetric: 92.0, volatility: 0.007, meanReversion: 0.025, realScore: null, source: 'Estimated (NDCG / MRR)' },
+  VOYAGE:   { name: 'Voyage Embedding 3',    category: 'Search', baseMetric: 91.5, volatility: 0.008, meanReversion: 0.022, realScore: null, source: 'Estimated (MTEB)' },
 }
 
 function gaussianRandom() {
@@ -38,11 +49,8 @@ function generateDataPoint(prevValue, config, timestamp) {
   const returns = drift + volatility * gaussianRandom()
   const value = Math.min(100, Math.max(0, prevValue * (1 + returns)))
 
-  // Simulate latency (in ms) — inversely correlated with performance
   const latency = 50 + Math.random() * 450 + (100 - value) * 5
-  // Simulate throughput (requests/min)
   const throughput = Math.floor(200 + Math.random() * 800 + (value - 80) * 20)
-  // Error rate (%)
   const errorRate = Math.max(0, 0.5 + gaussianRandom() * 0.5 + (95 - value) * 0.02)
 
   return {
@@ -61,13 +69,8 @@ export function generateHistoricalData(modelId, periods = 200, interval = '1h') 
   if (!config) throw new Error(`Unknown model: ${modelId}`)
 
   const intervalMs = {
-    '1m': 60000,
-    '5m': 300000,
-    '15m': 900000,
-    '1h': 3600000,
-    '4h': 14400000,
-    '1d': 86400000,
-  '1w': 604800000,
+    '1m': 60000, '5m': 300000, '15m': 900000,
+    '1h': 3600000, '4h': 14400000, '1d': 86400000, '1w': 604800000,
   }
 
   const ms = intervalMs[interval] || 3600000
@@ -113,6 +116,8 @@ export function getModels() {
     name: config.name,
     category: config.category,
     baseMetric: config.baseMetric,
+    realScore: config.realScore,
+    source: config.source,
   }))
 }
 
