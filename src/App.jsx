@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart3, Activity, Zap, AlertTriangle, Brain, TrendingUp, TrendingDown, Gauge, RefreshCw, Menu, X } from 'lucide-react'
 import useModelStore from './stores/marketStore'
@@ -26,10 +26,10 @@ function App() {
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           <Brain className="text-accent" size={24} />
-          <h1 className="text-lg font-bold">AI Model Monitor</h1>
+          <h1 className="text-lg font-bold">AI Model Monitor <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded ml-1 font-normal">模拟数据</span></h1>
         </div>
         <div className="flex items-center gap-4 text-sm">
-          <span className="text-text-secondary">Real-time</span>
+          <span className="text-text-secondary">每1.5秒模拟更新</span>
           <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
         </div>
       </header>
@@ -108,7 +108,7 @@ function App() {
               ))}
             </div>
 
-            {/* Main Chart */}
+            <div className="text-xs text-text-muted mb-1 mt-1">* 基于 LMSYS Chatbot Arena Elo 公开基准值模拟生成，非实时 API 数据</div>`n{/* Main Chart */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="bg-surface rounded-xl p-4 border border-border">
               <h3 className="text-sm font-semibold mb-4">Accuracy Trend</h3>

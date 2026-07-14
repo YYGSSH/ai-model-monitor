@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AI Model Performance Data Service
  *
  * All LLM benchmark data sourced from LMSYS Chatbot Arena Elo ratings
@@ -100,8 +100,8 @@ export function generateTick(modelId, lastAccuracy) {
   const config = MODELS[modelId]
   if (!config) return null
 
-  const tickVol = config.volatility * 0.1
-  const reversion = config.meanReversion * 0.05 * (config.baseMetric - lastAccuracy)
+  const tickVol = config.volatility * 1.5
+  const reversion = config.meanReversion * 0.6 * (config.baseMetric - lastAccuracy)
   const drift = reversion / config.baseMetric
   const change = drift + tickVol * gaussianRandom()
   const newAccuracy = Math.min(100, Math.max(0, lastAccuracy * (1 + change)))

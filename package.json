@@ -1,9 +1,9 @@
-{
+﻿{
     "name":  "ai-model-monitor",
     "private":  true,
     "version":  "1.0.0",
     "type":  "module",
-    "description":  "AI Model Performance Monitor 鈥?real-time metrics, trend analysis, and intelligent insights with DeepSeek AI integration",
+    "description":  "AI Model Performance Monitor 鈥?real-time simulated metrics dashboard based on LMSYS Arena Elo benchmarks",
     "license":  "MIT",
     "scripts":  {
                     "dev":  "vite",
