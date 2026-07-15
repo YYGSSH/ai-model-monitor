@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { BarChart3, Activity, Zap, AlertTriangle, Brain, TrendingUp, TrendingDown, Gauge, RefreshCw, Menu, X } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { BarChart3, Activity, Zap, AlertTriangle, Brain, TrendingUp, TrendingDown, Menu, X } from 'lucide-react'
 import useModelStore from './stores/marketStore'
 import { getModels } from './services/marketData'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, BarChart, Bar, Legend } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, BarChart, Bar } from 'recharts'
 
 function App() {
   const store = useModelStore()
@@ -87,7 +87,7 @@ function App() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { label: 'Accuracy', value: `${store.currentAccuracy?.toFixed(1) || '0'}%`, icon: <Activity size={18} />, change: store.dayChange, color: 'from-violet-500 to-purple-600' },
-                { label: 'Latency', value: `${store.currentLatency?.toFixed(0) || '0'}ms`, icon: <Zap size={18} />, change: -store.currentLatency, color: 'from-cyan-500 to-blue-600' },
+                { label: 'Latency', value: `${store.currentLatency?.toFixed(0) || '0'}ms`, icon: <Zap size={18} />, change: null, color: 'from-cyan-500 to-blue-600' },
                 { label: 'Throughput', value: `${((store.currentThroughput || 0) / 1000).toFixed(1)}k/min`, icon: <BarChart3 size={18} />, change: null, color: 'from-emerald-500 to-green-600' },
                 { label: 'Error Rate', value: `${store.currentErrorRate?.toFixed(2) || '0'}%`, icon: <AlertTriangle size={18} />, change: null, color: 'from-rose-500 to-red-600' },
               ].map((m, i) => (
@@ -108,7 +108,9 @@ function App() {
               ))}
             </div>
 
-            <div className="text-xs text-text-muted mb-1 mt-1">* 基于 LMSYS Chatbot Arena Elo 公开基准值模拟生成，非实时 API 数据</div>`n{/* Main Chart */}
+            <div className="text-xs text-text-muted mb-1 mt-1">* 基于 LMSYS Chatbot Arena Elo 公开基准值模拟生成，非实时 API 数据</div>
+
+            {/* Main Chart */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="bg-surface rounded-xl p-4 border border-border">
               <h3 className="text-sm font-semibold mb-4">Accuracy Trend</h3>
